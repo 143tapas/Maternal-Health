@@ -6,10 +6,18 @@ from flask_login import LoginManager, login_user, login_required, logout_user, c
 from models import db, User, PregnancyData, BabyData, HealthLog, Reminder, HealthReport, DoctorProfile, PharmacyItem, GovScheme, JobOpportunity, MentalHealthLog
 
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = os.path.join(app.root_path, 'static', 'uploads')
-app.config['SECRET_KEY'] = 'smarter_maternal_secret_key'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///maternal.db'
+
+# Use /tmp for Vercel serverless (read-only filesystem except /tmp)
+import sys
+IS_VERCEL = os.environ.get('VERCEL', False)
+DB_PATH = '/tmp/maternal.db' if IS_VERCEL else os.path.join(app.root_path, 'instance', 'maternal.db')
+UPLOAD_PATH = '/tmp/uploads' if IS_VERCEL else os.path.join(app.root_path, 'static', 'uploads')
+
+app.config['UPLOAD_FOLDER'] = UPLOAD_PATH
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'smarter_maternal_secret_key')
+app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_PATH}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+os.makedirs(UPLOAD_PATH, exist_ok=True)
 
 db.init_app(app)
 
@@ -245,7 +253,7 @@ def empowerment():
     jobs = JobOpportunity.query.all()
     return render_template('empowerment.html', user=current_user, jobs=jobs)
 
-with app.app_context():
+def seed_db():
     db.create_all()
     if not DoctorProfile.query.first():
         docs = [
@@ -280,6 +288,9 @@ with app.app_context():
         ]
         db.session.add_all(j)
         db.session.commit()
+
+with app.app_context():
+    seed_db()
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
