@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="auth-container" style="max-width: 900px;">
+    <div class="text-center">
+        <h2><i class="fa-solid fa-user-doctor" style="color: var(--primary-pink)"></i> Certified Doctors</h2>
+        <p>Connect with top specialists for virtual and offline consultations.</p>
+    </div>
+    <div class="dashboard-grid" style="padding: 0; margin-top:20px;">
+        {% for doc in doctors %}
+        <div class="dashboard-card" style="align-items:flex-start; text-align:left; border-top: 5px solid var(--primary-blue);">
+            <h3 style="margin:0; color:var(--primary-blue);">{{ doc.name }}</h3>
+            <span style="color:#666; font-size:0.9rem;">{{ doc.specialty }}</span>
+            <span style="font-weight:bold; margin-bottom:10px; margin-top:5px;"><i class="fa-regular fa-hospital"></i> {{ doc.hospital }}</span>
+            <div style="display:flex; justify-content:space-between; width:100%;">
+                <span>⭐ {{ doc.rating }}/5.0</span>
+                <span style="font-weight:bold; color:green;">₹{{ doc.fee }}</span>
+            </div>
+            <button class="btn mt-4" style="width:100%;">Book Consultation</button>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

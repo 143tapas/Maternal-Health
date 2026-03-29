@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="auth-container" style="max-width: 900px;">
+    <div class="text-center">
+        <h2><i class="fa-solid fa-briefcase" style="color: var(--primary-pink)"></i> Women Empowerment & Marketplace</h2>
+        <p>Explore flexible work opportunities and support women-owned artisan stores.</p>
+    </div>
+    
+    <div class="mt-4">
+        <h3><i class="fa-solid fa-laptop-house"></i> Flexible & Remote Opportunities</h3>
+        <div class="dashboard-grid" style="padding:0; margin-top:15px;">
+            {% for job in jobs %}
+            <div class="dashboard-card" style="align-items:flex-start; text-align:left; border-top: 5px solid var(--primary-blue);">
+                <h4 style="margin:0;">{{ job.title }}</h4>
+                <p style="margin:5px 0; color:#666;">{{ job.company }}</p>
+                <div style="display:flex; justify-content:space-between; width:100%; font-size:0.9rem;">
+                    <span style="background:#eee; padding:3px 8px; border-radius:10px;">{{ job.job_type }}</span>
+                    <span style="font-weight:bold; color:green;">{{ job.salary }}</span>
+                </div>
+                <button class="btn btn-secondary mt-3" style="width:100%;">Apply Now</button>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <div class="mt-4" style="background:#fff; padding:20px; border-radius:10px; text-align:center; box-shadow:0 4px 6px rgba(0,0,0,0.05);">
+        <h3><i class="fa-solid fa-shop"></i> Rural Artisan Marketplace</h3>
+        <p>Buy authentic handlooms and crafts directly from rural mothers.</p>
+        <button class="btn mt-2">Browse Store</button>
+    </div>
+</div>
+{% endblock %}

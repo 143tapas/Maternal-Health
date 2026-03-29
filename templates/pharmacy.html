@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="auth-container" style="max-width: 900px;">
+    <div class="text-center">
+        <h2><i class="fa-solid fa-pills" style="color: var(--primary-pink)"></i> Pharmacy Delivery</h2>
+        <p>Order prescribed prenatal medicines linked to your records.</p>
+    </div>
+    <div class="dashboard-grid" style="padding: 0; margin-top:20px;">
+        {% for item in items %}
+        <div class="dashboard-card" style="align-items:flex-start; text-align:left; border-top:5px solid {% if item.in_stock %}var(--primary-pink){% else %}#ccc{% endif %};">
+            <h3 style="margin:0;">{{ item.name }}</h3>
+            <span style="color:#666; font-size:0.9rem;">{{ item.category }}</span>
+            <h4 style="margin:10px 0; color:var(--primary-blue);">₹{{ item.price }}</h4>
+            {% if item.in_stock %}
+                <button class="btn btn-secondary" style="width:100%;"><i class="fa-solid fa-cart-shopping"></i> Add to Cart</button>
+            {% else %}
+                <button class="btn" style="width:100%; background:#ccc; cursor:not-allowed;" disabled>Out of Stock</button>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

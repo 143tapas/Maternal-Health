@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="auth-container" style="max-width: 800px;">
+    <div class="text-center">
+        <h2><i class="fa-solid fa-calendar-check" style="color: var(--primary-pink)"></i> Pregnancy Tracker</h2>
+        {% if pregnancy %}
+            <p style="font-size: 1.2rem; font-weight: bold; color: var(--primary-blue);">Currently in Week {{ pregnancy.current_week }}</p>
+        {% else %}
+            <p>Setup your pregnancy profile timeline to see week-by-week progress.</p>
+            <button class="btn mt-4">Setup Timeline</button>
+        {% endif %}
+    </div>
+    <div class="mt-4" style="background:#fff; border-radius:10px; padding:20px; text-align:center; box-shadow:0 4px 6px rgba(0,0,0,0.05);">
+        <h3>Baby Growth</h3>
+        <p>This week, your baby is the size of an <strong>Apple!</strong> 🍏</p>
+        <div style="height: 15px; background: #eee; border-radius:10px; margin: 20px 0;">
+            <div style="height:100%; width: 35%; background: var(--bg-gradient); border-radius:10px;"></div>
+        </div>
+        <div class="flex-center mt-4">
+            <button class="btn btn-secondary"><i class="fa-solid fa-stethoscope"></i> Log Symptoms</button>
+            <button class="btn"><i class="fa-regular fa-calendar-plus"></i> Add Appointment</button>
+        </div>
+    </div>
+</div>
+{% endblock %}

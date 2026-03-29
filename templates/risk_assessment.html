@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="auth-container" style="max-width: 800px;">
+    <div class="text-center">
+        <h2><i class="fa-solid fa-file-medical" style="color: var(--primary-pink)"></i> AI Risk Assessment</h2>
+        <p>Based on your logged symptoms and vitals.</p>
+    </div>
+    
+    <div class="dashboard-grid" style="padding: 0; margin-top:20px;">
+        <div class="dashboard-card" style="border-left: 5px solid {% if 'High' in risks.hypertension %}red{% elif 'Moderate' in risks.hypertension %}orange{% else %}green{% endif %};">
+            <h4>Hypertension Risk</h4>
+            <p style="font-size:1.2rem; font-weight:bold;">{{ risks.hypertension }}</p>
+        </div>
+        <div class="dashboard-card" style="border-left: 5px solid {% if 'High' in risks.anemia %}red{% elif 'Moderate' in risks.anemia %}orange{% else %}green{% endif %};">
+            <h4>Anemia Risk</h4>
+            <p style="font-size:1.2rem; font-weight:bold;">{{ risks.anemia }}</p>
+        </div>
+        <div class="dashboard-card" style="border-left: 5px solid {% if 'High' in risks.gestational_diabetes %}red{% elif 'Moderate' in risks.gestational_diabetes %}orange{% else %}green{% endif %};">
+            <h4>Gestational Diabetes</h4>
+            <p style="font-size:1.2rem; font-weight:bold;">{{ risks.gestational_diabetes }}</p>
+        </div>
+    </div>
+    
+    {% if risks.warnings %}
+    <div class="mt-4" style="background:#ffe3e6; padding:15px; border-radius:10px; border-left:5px solid #d11a2a;">
+        <h4 style="color:#d11a2a; margin-top:0;"><i class="fa-solid fa-triangle-exclamation"></i> AI Health Alerts</h4>
+        <ul style="margin-bottom:0;">
+            {% for warning in risks.warnings %}
+                <li>{{ warning }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    
+    <div class="text-center mt-4">
+        <button class="btn btn-secondary">Add New Health Log</button>
+    </div>
+</div>
+{% endblock %}

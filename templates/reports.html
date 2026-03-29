@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="auth-container" style="max-width: 800px;">
+    <div class="text-center">
+        <h2><i class="fa-solid fa-file-arrow-up" style="color: var(--primary-pink)"></i> Medical Reports</h2>
+        <p>Safely store and analyze your blood tests, ultrasounds, and prescriptions.</p>
+    </div>
+    
+    <form method="POST" enctype="multipart/form-data" action="{{ url_for('reports') }}" style="background:#f9f9f9; padding:20px; border-radius:10px; margin: 20px 0;">
+        <div style="display:flex; gap:15px; align-items:flex-end;">
+            <div style="flex-grow:1;">
+                <label>Report Title</label>
+                <input type="text" name="title" class="form-control" placeholder="e.g. 2nd Trimester Ultrasound" required>
+            </div>
+            <div style="flex-grow:2;">
+                <label>Upload File (PDF/Image)</label>
+                <input type="file" name="report_file" class="form-control" accept=".pdf,.png,.jpg,.jpeg" required style="background:white;">
+            </div>
+            <button type="submit" class="btn" style="padding:12px 25px;"><i class="fa-solid fa-upload"></i> Upload</button>
+        </div>
+    </form>
+    
+    <div class="mt-4">
+        <h3>Uploaded Reports</h3>
+        <table style="width:100%; text-align:left; border-collapse: collapse; background:#fff; border-radius:8px; overflow:hidden;">
+            <tr style="background:var(--primary-blue); color:white;">
+                <th style="padding:12px;">Date</th>
+                <th style="padding:12px;">Title</th>
+                <th style="padding:12px;">Action</th>
+            </tr>
+            {% for report in reports %}
+            <tr style="border-bottom:1px solid #eee;">
+                <td style="padding:12px;">{{ report.upload_date.strftime('%Y-%m-%d') }}</td>
+                <td style="padding:12px;">{{ report.title }}</td>
+                <td style="padding:12px;">
+                    <a href="{{ url_for('static', filename='uploads/' + report.file_path) }}" target="_blank" class="btn btn-secondary" style="padding:5px 10px; font-size:0.9rem;">View</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="3" class="text-center" style="padding:20px;">No reports uploaded yet.</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock %}

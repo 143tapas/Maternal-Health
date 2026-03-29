@@ -1,0 +1,186 @@
+/* soft gradient pink and blue colors */
+:root {
+    --primary-pink: #ff9a9e;
+    --primary-blue: #a1c4fd;
+    --bg-gradient: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+    --card-bg: rgba(255, 255, 255, 0.85);
+    --text-dark: #333;
+    --text-light: #fff;
+    --btn-hover: #ff758c;
+}
+body {
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: var(--bg-gradient);
+    min-height: 100vh;
+    color: var(--text-dark);
+}
+.navbar {
+    background: linear-gradient(to right, var(--primary-pink), var(--primary-blue));
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--text-light);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.nav-links {
+    display: flex;
+    align-items: center;
+}
+.nav-links a {
+    color: var(--text-light);
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: 500;
+}
+.hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 4rem 2rem;
+}
+.hero img {
+    max-width: 350px;
+    border-radius: 50%;
+    margin-bottom: 2rem;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+.btn {
+    display: inline-block;
+    padding: 14px 28px;
+    border-radius: 30px;
+    background: var(--primary-pink);
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    text-align: center;
+}
+.btn:hover {
+    background: var(--btn-hover);
+    transform: translateY(-3px);
+}
+.btn-secondary {
+    background: var(--primary-blue);
+}
+.btn-secondary:hover {
+    background: #8eaddb;
+}
+.auth-container {
+    max-width: 400px;
+    margin: 4rem auto;
+    background: var(--card-bg);
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(31, 38, 135, 0.1);
+    backdrop-filter: blur(10px);
+}
+.form-group {
+    margin-bottom: 1.5rem;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+.form-control {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    outline: none;
+    transition: border 0.3s;
+}
+.form-control:focus {
+    border-color: var(--primary-blue);
+}
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.dashboard-card {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    text-decoration: none;
+    color: var(--text-dark);
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    border: 1px solid rgba(255,255,255,0.4);
+}
+.dashboard-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+.dashboard-card i {
+    font-size: 3.5rem;
+    background: -webkit-linear-gradient(135deg, var(--primary-pink), var(--primary-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.dashboard-card h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+.alert {
+    padding: 15px;
+    margin: 20px auto;
+    max-width: 600px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+.alert-error {
+    background: #ffe3e6;
+    color: #d11a2a;
+    border-left: 5px solid #d11a2a;
+}
+.alert-success {
+    background: #e3ffe6;
+    color: #1ad12a;
+    border-left: 5px solid #1ad12a;
+}
+.lang-toggle {
+    background: rgba(255,255,255,0.25);
+    border: 1px solid rgba(255,255,255,0.5);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 500;
+    outline: none;
+}
+.lang-toggle:hover {
+    background: rgba(255,255,255,0.4);
+}
+/* Utility */
+.text-center { text-align: center; }
+.mt-4 { margin-top: 1.5rem; }
+.mb-4 { margin-bottom: 1.5rem; }
+.flex-center { display: flex; justify-content: center; gap: 1rem; }

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="auth-container" style="max-width: 600px; padding: 20px;">
+    <div class="text-center mb-4">
+        <h2><i class="fa-solid fa-robot" style="color: var(--primary-pink);"></i> AI Health Guide</h2>
+        <p>Ask about symptoms, remedies, or emotional support.</p>
+    </div>
+    <div id="chatBox" style="height: 300px; overflow-y: auto; background: #fff; border-radius:10px; padding: 15px; margin-bottom:15px; border: 1px solid #ddd;">
+        <div style="margin-bottom:10px;">
+            <strong style="color: var(--primary-blue);">AI Guide:</strong> Hello {{ user.name }}, how are you feeling today?
+        </div>
+    </div>
+    <form id="chatForm" style="display:flex; gap:10px;">
+        <input type="text" id="userInput" class="form-control" placeholder="Type symptoms (e.g., back pain, anxiety)..." required style="flex-grow:1;">
+        <button type="submit" class="btn" style="padding: 10px 20px;">Send</button>
+    </form>
+</div>
+
+<script>
+    document.getElementById('chatForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const inputField = document.getElementById('userInput');
+        const msg = inputField.value;
+        const chatBox = document.getElementById('chatBox');
+        
+        chatBox.innerHTML += `<div style="margin-bottom:10px; text-align:right;"><strong style="color: var(--primary-pink);">You:</strong> ${msg}</div>`;
+        inputField.value = '';
+        
+        const response = await fetch("{{ url_for('ai_assistant') }}", {
+            method: 'POST',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            body: new URLSearchParams({'message': msg})
+        });
+        const data = await response.json();
+        chatBox.innerHTML += `<div style="margin-bottom:10px;"><strong style="color: var(--primary-blue);">AI Guide:</strong> ${data.bot_response}</div>`;
+        chatBox.scrollTop = chatBox.scrollHeight;
+    });
+</script>
+{% endblock %}

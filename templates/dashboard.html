@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block content %}
+<div style="text-align: center; margin-top: 2rem;">
+    <h2>Welcome, {{ user.name }} <span style="font-size:1rem; color:#666;">({{ user.role }})</span></h2>
+    <p>How can we assist you today?</p>
+</div>
+
+<div class="dashboard-grid">
+    <a href="{{ url_for('pre_maternal') }}" class="dashboard-card" title="Pre-Maternal Care">
+        <i class="fa-solid fa-person-pregnant"></i>
+        <h3>Pre-Maternal</h3>
+    </a>
+    <a href="{{ url_for('pregnancy_tracker') }}" class="dashboard-card" title="Pregnancy Tracker">
+        <i class="fa-solid fa-calendar-check"></i>
+        <h3>Pregnancy Tracker</h3>
+    </a>
+    <a href="{{ url_for('post_maternal') }}" class="dashboard-card" title="Post-Maternal Care">
+        <i class="fa-solid fa-bed-pulse"></i>
+        <h3>Post-Maternal</h3>
+    </a>
+    <a href="{{ url_for('baby_care') }}" class="dashboard-card" title="Baby Care">
+        <i class="fa-solid fa-baby-carriage"></i>
+        <h3>Baby Care</h3>
+    </a>
+    <a href="{{ url_for('ai_assistant') }}" class="dashboard-card" title="AI Assistant">
+        <i class="fa-solid fa-robot"></i>
+        <h3>AI Assistant</h3>
+    </a>
+    <a href="{{ url_for('scheduler') }}" class="dashboard-card" title="Smart Scheduler">
+        <i class="fa-regular fa-clock"></i>
+        <h3>Smart Scheduler</h3>
+    </a>
+    <a href="{{ url_for('risk_assessment') }}" class="dashboard-card" title="Reports & Health Data">
+        <i class="fa-solid fa-file-medical"></i>
+        <h3>Risk Assessment</h3>
+    </a>
+    <a href="{{ url_for('doctors') }}" class="dashboard-card" title="Doctor Consultation">
+        <i class="fa-solid fa-user-doctor"></i>
+        <h3>Doctors</h3>
+    </a>
+    <a href="{{ url_for('pharmacy') }}" class="dashboard-card" title="Pharmacy">
+        <i class="fa-solid fa-pills"></i>
+        <h3>Pharmacy</h3>
+    </a>
+    <a href="{{ url_for('emergency') }}" class="dashboard-card" title="Emergency & Safety" style="border: 2px solid #d11a2a; background: #fff0f2;">
+        <i class="fa-solid fa-truck-medical" style="color:#d11a2a; -webkit-text-fill-color: initial;"></i>
+        <h3 style="color:#d11a2a;">Emergency SOS</h3>
+    </a>
+    <a href="{{ url_for('safe_route') }}" class="dashboard-card" title="Safe Route AI">
+        <i class="fa-solid fa-map-location-dot"></i>
+        <h3>Safe Route</h3>
+    </a>
+    <a href="{{ url_for('reports') }}" class="dashboard-card" title="Upload Health Reports">
+        <i class="fa-solid fa-file-arrow-up"></i>
+        <h3>My Reports</h3>
+    </a>
+    <a href="{{ url_for('schemes') }}" class="dashboard-card" title="Government Schemes">
+        <i class="fa-solid fa-landmark"></i>
+        <h3>Govt Schemes</h3>
+    </a>
+    <a href="{{ url_for('mental_health') }}" class="dashboard-card" title="Mental Health">
+        <i class="fa-solid fa-brain"></i>
+        <h3>Mental Health</h3>
+    </a>
+    <a href="{{ url_for('empowerment') }}" class="dashboard-card" title="Women Empowerment">
+        <i class="fa-solid fa-briefcase"></i>
+        <h3>Empowerment</h3>
+    </a>
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="auth-container" style="max-width: 800px;">
+    <div class="text-center">
+        <h2><i class="fa-solid fa-brain" style="color: var(--primary-pink)"></i> Maternal Mental Health</h2>
+        <p>Your mental well-being is just as important as your physical health.</p>
+    </div>
+    
+    <div style="background:#fff; padding:20px; border-radius:10px; text-align:center; margin:20px 0; box-shadow:0 4px 6px rgba(0,0,0,0.05);">
+        <h3>How are you feeling today?</h3>
+        <form method="POST" action="{{ url_for('mental_health') }}" style="display:flex; justify-content:center; gap:20px; margin-top:15px;">
+            <button type="submit" name="mood" value="Happy 😊" style="background:none; border:none; font-size:3rem; cursor:pointer; transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">😊</button>
+            <button type="submit" name="mood" value="Anxious 😰" style="background:none; border:none; font-size:3rem; cursor:pointer; transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">😰</button>
+            <button type="submit" name="mood" value="Sad 😢" style="background:none; border:none; font-size:3rem; cursor:pointer; transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">😢</button>
+        </form>
+    </div>
+
+    <div class="dashboard-grid" style="padding:0;">
+        <div class="dashboard-card" style="align-items:center;">
+            <h4><i class="fa-solid fa-headphones"></i> Guided Meditation</h4>
+            <p>10 Minute Relaxing Audio</p>
+            <button class="btn btn-secondary">Play Audio</button>
+        </div>
+        <div class="dashboard-card" style="align-items:center;">
+            <h4><i class="fa-solid fa-user-doctor"></i> Counseling</h4>
+            <p>Connect with a therapist.</p>
+            <button class="btn">Find Therapist</button>
+        </div>
+    </div>
+    
+    <div class="mt-4">
+        <h4>Recent Mood Logs</h4>
+        <ul style="list-style-type:none; padding:0;">
+            {% for log in logs %}
+            <li style="background:#f9f9f9; padding:10px; border-radius:5px; margin-bottom:5px; font-weight:bold;">{{ log.date.strftime('%Y-%m-%d') }} - {{ log.mood }}</li>
+            {% else %}
+            <li>No moods logged yet.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

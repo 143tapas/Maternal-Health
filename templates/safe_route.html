@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<div class="auth-container" style="max-width: 1000px; padding: 20px;">
+    <div class="text-center">
+        <h2><i class="fa-solid fa-map-location-dot" style="color: var(--primary-pink)"></i> Safe Route AI</h2>
+        <p>Finding the safest and fastest route to your nearest verified hospital.</p>
+    </div>
+
+    <div id="map" style="width: 100%; height: 500px; border-radius: 10px; z-index: 1;"></div>
+    
+    <script>
+        const map = L.map('map').setView([20.5937, 78.9629], 5);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition((pos) => {
+                const lat = pos.coords.latitude;
+                const lon = pos.coords.longitude;
+                map.setView([lat, lon], 13);
+                
+                L.marker([lat, lon]).addTo(map).bindPopup("<b>You are here</b>").openPopup();
+                
+                // Real-world scenario simulation (Cloudnine Hospital)
+                const hLat = lat + 0.015;
+                const hLon = lon + 0.015;
+                
+                const hospitalIcon = L.icon({
+                    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
+                    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                    iconSize: [25, 41],
+                    iconAnchor: [12, 41],
+                    popupAnchor: [1, -34],
+                    shadowSize: [41, 41]
+                });
+                
+                L.marker([hLat, hLon], {icon: hospitalIcon}).addTo(map).bindPopup("<b>Nearest Safe Hospital</b><br>Cloudnine Maternity Center").openPopup();
+                L.polyline([[lat, lon], [hLat, hLon]], {color: 'blue'}).addTo(map);
+            });
+        }
+    </script>
+</div>
+{% endblock %}

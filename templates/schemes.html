@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="auth-container" style="max-width: 900px;">
+    <div class="text-center">
+        <h2><i class="fa-solid fa-landmark" style="color: var(--primary-pink)"></i> Government Schemes</h2>
+        <p>Explore maternal benefits and apply directly based on your eligibility.</p>
+    </div>
+    <div class="mt-4">
+        {% for s in schemes %}
+        <div style="background:#fff; border-radius:10px; padding:20px; box-shadow:0 4px 6px rgba(0,0,0,0.05); margin-bottom:15px; border-left: 5px solid var(--primary-blue);">
+            <h3 style="margin-top:0; color:var(--primary-blue);">{{ s.name }}</h3>
+            <p><strong>Description:</strong> {{ s.description }}</p>
+            <p><strong>Eligibility:</strong> {{ s.eligibility }}</p>
+            <p style="color:green; font-weight:bold;"><strong>Benefit:</strong> {{ s.benefit }}</p>
+            <button class="btn btn-secondary mt-2">Check Eligibility / Apply</button>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

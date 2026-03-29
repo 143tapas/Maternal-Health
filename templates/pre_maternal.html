@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="auth-container" style="max-width: 800px;">
+    <div class="text-center">
+        <h2><i class="fa-solid fa-person-pregnant" style="color: var(--primary-pink)"></i> Pre-Maternal Care</h2>
+        <p>Your journey begins here. Track fertility, discover nutrition tips, and prepare your body.</p>
+    </div>
+    <hr style="border:1px solid #eee; margin:20px 0;">
+    <div class="dashboard-grid" style="padding: 0;">
+        <div class="dashboard-card pt-2">
+            <h4>Fertility & Ovulation</h4>
+            <p>Track your periods and identify your highest fertility window.</p>
+            <button class="btn">Log Cycle</button>
+        </div>
+        <div class="dashboard-card pt-2">
+            <h4>Nutrition Plan</h4>
+            <p>Folic acid and vitamins checklist for a healthy start.</p>
+            <button class="btn btn-secondary">View Plan</button>
+        </div>
+    </div>
+</div>
+{% endblock %}

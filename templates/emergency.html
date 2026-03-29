@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="auth-container text-center" style="max-width: 600px;">
+    <h2 style="color: #d11a2a;"><i class="fa-solid fa-triangle-exclamation"></i> Emergency SOS</h2>
+    <p>Press the button below to immediately alert your family and nearby hospitals with your live location.</p>
+    
+    <button id="sosBtn" style="background:#d11a2a; color:white; width:200px; height:200px; border-radius:50%; border:none; font-size:2rem; font-weight:bold; cursor:pointer; box-shadow:0 10px 30px rgba(209,26,42,0.4); margin:30px auto; display:block; transition:transform 0.1s;">
+        SOS
+    </button>
+    <p id="sosStatus" style="font-weight:bold; font-size:1.1rem; min-height:30px;"></p>
+
+    <script>
+        document.getElementById('sosBtn').addEventListener('click', () => {
+            const btn = document.getElementById('sosBtn');
+            const status = document.getElementById('sosStatus');
+            btn.style.transform = 'scale(0.9)';
+            setTimeout(() => { btn.style.transform = 'scale(1)'; }, 150);
+            
+            status.style.color = '#333';
+            status.innerText = 'Locating...';
+            
+            if ("geolocation" in navigator) {
+                navigator.geolocation.getCurrentPosition((pos) => {
+                    const lat = pos.coords.latitude;
+                    const lon = pos.coords.longitude;
+                    status.style.color = '#1ad12a';
+                    status.innerHTML = `Location Acquired: ${lat.toFixed(4)}, ${lon.toFixed(4)}<br><span style='color:#d11a2a;'>Alerting Family & Hospitals!</span>`;
+                }, () => {
+                    status.style.color = '#d11a2a';
+                    status.innerText = "Location access denied. Falling back to registered address.";
+                });
+            } else {
+                status.innerText = "Geolocation not supported by your browser.";
+            }
+        });
+    </script>
+</div>
+{% endblock %}
